@@ -1,84 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mis Datos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha del Cliente</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 15px;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+        margin: 0;
+        padding: 20px;
     }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
     }
     h1 {
-      text-align: center;
+        text-align: center;
+        color: #1b263b;
     }
-    img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
+    p.message {
+        text-align: center;
+        font-size: 1.1em;
+        color: #334e68;
+        margin-bottom: 30px;
     }
-    .section {
-      margin-top: 20px;
+    .documents {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
     }
-    .message {
-      background: #eef;
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 15px;
+    .doc-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 15px;
+        width: 220px;
+        text-align: center;
     }
-    .footer {
-      font-size: 12px;
-      color: #555;
-      text-align: center;
-      margin-top: 20px;
+    .doc-card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
     }
-  </style>
+    .doc-card h3 {
+        margin: 0;
+        color: #102a43;
+        font-size: 1em;
+    }
+    @media (max-width: 600px) {
+        .documents {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
 </head>
 <body>
-
-  <div class="card">
-    <h1>Mis Datos</h1>
-
-    <div class="section">
-      <strong>Nombre:</strong>
-      <p>Jusn Perez Coronado</p>
+<div class="container">
+    <h1>Mijael Martínez Mayuri</h1>
+    <p class="message">Si encuentras esta mochila, por favor comunícate conmigo.</p>
+    <div class="documents">
+        <div class="doc-card">
+            <img src="imagenes/mijael/dni-frente.jpg" alt="DNI Frente">
+            <h3>DNI Frente</h3>
+        </div>
+        <div class="doc-card">
+            <img src="imagenes/mijael/dni-reverso.jpg" alt="DNI Reverso">
+            <h3>DNI Reverso</h3>
+        </div>
+        <div class="doc-card">
+            <img src="imagenes/mijael/licencia.jpg" alt="Licencia">
+            <h3>Licencia</h3>
+        </div>
     </div>
-
-    <div class="section">
-      <strong>DNI - Frente</strong>
-      <img src="dni-frente.jpg" alt="DNI Frente">
-    </div>
-
-    <div class="section">
-      <strong>DNI - Reverso</strong>
-      <img src="dni-reverso.jpg" alt="DNI Reverso">
-    </div>
-
-    <div class="section">
-      <strong>Licencia</strong>
-      <img src="licencia.jpg" alt="Licencia">
-    </div>
-
-    <div class="message">
-      Si encuentras esta mochila, por favor comunícate con el dueño.
-      Los documentos mostrados son solo para identificación.
-      Gracias por tu honestidad.
-    </div>
-
-    <div class="footer">
-      Información compartida voluntariamente solo para identificación.
-    </div>
-  </div>
-
+</div>
 </body>
 </html>
