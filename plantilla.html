@@ -13,16 +13,45 @@
         background: linear-gradient(135deg, #fdfbfb, #ebedee);
         color: #1c1c1e;
     }
+
+    /* Header con imagen de fondo */
+    .header {
+        text-align: center;
+        padding: 60px 20px 40px;
+        background-image: url('fondo-mochila.jpg'); /* Cambia por tu imagen */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #fff;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 2.2em;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    }
+
+    .header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    }
+
     .container {
         max-width: 900px;
         margin: 40px auto;
         padding: 0 20px;
     }
+
     .documents {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 25px;
     }
+
     .doc-card {
         background: #fff;
         border-radius: 20px;
@@ -31,18 +60,30 @@
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         text-align: center;
     }
+
     .doc-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 25px rgba(0,0,0,0.15);
     }
+
     .doc-card img {
         width: 100%;
         display: block;
         border-bottom: 1px solid #eee;
     }
+
+    @media (max-width: 600px) {
+        .header h1 { font-size: 1.6em; }
+        .header p { font-size: 1em; }
+    }
 </style>
 </head>
 <body>
+
+<div class="header">
+    <h1>Mijael Martínez Mayuri</h1>
+    <p>Si encuentras esta mochila, por favor comunícate conmigo.</p>
+</div>
 
 <div class="container">
     <div class="documents" id="documents"></div>
@@ -54,6 +95,7 @@
         "dni-frente.jpg",
         "dni-reverso.jpg",
         "licencia.jpg"
+        // puedes agregar más, por ejemplo: "soat.jpg"
     ];
 
     const container = document.getElementById('documents');
