@@ -80,18 +80,35 @@
 </div>
 
 <div class="container">
-    <div class="documents">
-        <div class="doc-card">
-            <img src="mijael-dni-frente.jpg" alt="DNI Frente">
-        </div>
-        <div class="doc-card">
-            <img src="mijael-dni-reverso.jpg" alt="DNI Reverso">
-        </div>
-        <div class="doc-card">
-            <img src="mijael-licencia.jpg" alt="Licencia">
-        </div>
-    </div>
+    <div class="documents" id="documents"></div>
 </div>
+
+<script>
+    // Lista de imágenes de este cliente
+    const images = [
+        "mijael-dni-frente.jpg",
+        "mijael-dni-reverso.jpg",
+        "mijael-licencia.jpg"
+    ];
+
+    const container = document.getElementById('documents');
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+
+        // Si la imagen carga correctamente, se agrega a la página
+        img.onload = () => {
+            const card = document.createElement('div');
+            card.className = 'doc-card';
+            card.appendChild(img);
+            container.appendChild(card);
+        };
+
+        // Si la imagen no existe, no hace nada
+        img.onerror = () => {};
+    });
+</script>
 
 </body>
 </html>
