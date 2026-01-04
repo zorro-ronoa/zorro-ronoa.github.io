@@ -4,118 +4,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Documentos Cliente</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(135deg, #fdfbfb, #ebedee);
-        color: #1c1c1e;
-    }
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    color: #1c1c1e;
+}
 
-    /* Header con imagen de fondo y colores personalizables */
-    .header {
-        text-align: center;
-        padding: 60px 20px 40px;
-        background-image: url('fondo-mochila.jpg'); /* Cambia por tu imagen */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-bottom-left-radius: 30px;
-        border-bottom-right-radius: 30px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
+.header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-image: url('fondo-mochila.jpg');
+    background-size: cover;
+    background-position: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 
-    .header h1 {
-        margin: 0;
-        font-size: 2.2em;
-        text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-        color: #FFFFFF; /* color blanco */
-    }
+.header h1, .header p {
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+}
 
-    .header p {
-        margin: 10px 0 0;
-        font-size: 1.2em;
-        text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-        color: #FFFFFF; /* color blanco */
-    }
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
 
-    .container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 0 20px;
-    }
+/* Botones */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #007AFF;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
 
-    .documents {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-    }
+.btn:hover {
+    background: #005ecb;
+}
 
-    .doc-card {
-        background: #fff;
-        border-radius: 20px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-        overflow: hidden;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        text-align: center;
-    }
+/* Tarjeta imagen */
+.doc-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-top: 20px;
+}
 
-    .doc-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    }
-
-    .doc-card img {
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid #eee;
-    }
-
-    @media (max-width: 600px) {
-        .header h1 { font-size: 1.6em; }
-        .header p { font-size: 1em; }
-    }
+.doc-card img {
+    width: 100%;
+    display: block;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Header con fondo y textos en blanco -->
 <div class="header">
     <h1>Mijael Martínez Mayuri</h1>
     <p>Si encuentras esta mochila, por favor comunícate conmigo.</p>
 </div>
 
 <div class="container">
-    <div class="documents" id="documents"></div>
+
+    <!-- Botones -->
+    <div id="buttons">
+        <button class="btn" onclick="openDoc('mijael-dni-frente.jpg')">DNI</button>
+        <button class="btn" onclick="openDoc('dni-reverso.jpg')">DNI Reverso</button>
+        <button class="btn" onclick="openDoc('licencia.jpg')">Licencia</button>
+    </div>
+
+    <!-- Imagen -->
+    <div id="viewer"></div>
+
+    <!-- Botón regresar -->
+    <button class="btn" id="backBtn" style="display:none;" onclick="goBack()">Regresar</button>
+
 </div>
 
 <script>
-    // Lista de imágenes posibles para cada cliente
-    const images = [
-        "mijael-dni-frente.jpg",
-        "dni-reverso.jpg",
-        "licencia.jpg"
-        // Agrega más imágenes aquí si lo deseas
-    ];
+function openDoc(src) {
+    const img = new Image();
+    img.src = src;
 
-    const container = document.getElementById('documents');
+    img.onload = () => {
+        document.getElementById('buttons').style.display = 'none';
+        document.getElementById('viewer').innerHTML =
+            `<div class="doc-card"><img src="${src}"></div>`;
+        document.getElementById('backBtn').style.display = 'inline-block';
+    };
 
-    images.forEach(src => {
-        const img = new Image();
-        img.src = src;
-        img.alt = "";
+    img.onerror = () => {
+        // No hace nada si no existe
+    };
+}
 
-        img.onload = () => {
-            const card = document.createElement('div');
-            card.className = 'doc-card';
-            card.appendChild(img);
-            container.appendChild(card);
-        };
-
-        img.onerror = () => {}; // No hace nada si la imagen no existe
-    });
+function goBack() {
+    document.getElementById('viewer').innerHTML = '';
+    document.getElementById('buttons').style.display = 'block';
+    document.getElementById('backBtn').style.display = 'none';
+}
 </script>
 
 </body>
