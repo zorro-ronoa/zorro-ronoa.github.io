@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Joy Lao - Carta</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #fdfbfb;
+    --card: #ffffff;
+    --text: #1c1c1e;
+    --accent: #1a7f37;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1115;
+        --card: #1b1e24;
+        --text: #f1f1f1;
+        --accent: #4ade80;
+    }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+.header {
+    text-align: center;
+    padding: 50px 20px;
+    background: #000;
+    color: #fff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Categorías */
+.categories {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.category {
+    padding: 10px 18px;
+    border-radius: 20px;
+    background: var(--card);
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.category:hover {
+    transform: scale(1.05);
+}
+
+.category.active {
+    background: var(--accent);
+    color: #000;
+}
+
+/* Menú */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.menu-item {
+    background: var(--card);
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+}
+
+.menu-item span {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.9em;
+    color: var(--accent);
+}
+
+.menu-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.35);
+}
+
+/* Preview */
+.preview {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.preview.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.preview img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.info {
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.desc {
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* Botón volver */
+.back-btn {
+    margin-top: 25px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>San Joy Lao</h1>
+    <p>Carta Digital</p>
+</div>
+
+<div class="container">
+
+    <!-- Categorías -->
+    <div class="categories">
+        <div class="category active" data-cat="todos">Todos</div>
+        <div class="category" data-cat="arroces">Arroces</div>
+        <div class="category" data-cat="sopas">Sopas</div>
+        <div class="category" data-cat="combos">Combos</div>
+    </div>
+
+    <!-- Menú -->
+    <div class="menu" id="menu">
+
+        <div class="menu-item" data-cat="arroces"
+             data-img="chaufa.jpg"
+             data-name="Arroz Chaufa"
+             data-price="S/ 18.00"
+             data-desc="Arroz salteado con pollo, huevo y sillao.">
+            Arroz Chaufa
+            <span>S/ 18.00</span>
+        </div>
+
+        <div class="menu-item" data-cat="combos"
+             data-img="combinado-pollo.jpg"
+             data-name="Combinado de Pollo"
+             data-price="S/ 22.00"
+             data-desc="Chaufa más tallarín saltado con pollo.">
+            Combinado de Pollo
+            <span>S/ 22.00</span>
+        </div>
+
+        <div class="menu-item" data-cat="sopas"
+             data-img="sopa-wantan.jpg"
+             data-name="Sopa Wantán"
+             data-price="S/ 15.00"
+             data-desc="Caldo tradicional con wantanes y verduras.">
+            Sopa Wantán
+            <span>S/ 15.00</span>
+        </div>
+
+    </div>
+
+    <!-- Preview -->
+    <div class="preview" id="preview">
+        <img id="img">
+        <div class="info">
+            <h2 id="name"></h2>
+            <div class="price" id="price"></div>
+            <div class="desc" id="desc"></div>
+        </div>
+        <button class="back-btn" onclick="volver()">⬅ Volver al menú</button>
+    </div>
+
+</div>
+
+<script>
+const items = document.querySelectorAll('.menu-item');
+const preview = document.getElementById('preview');
+const img = document.getElementById('img');
+const name = document.getElementById('name');
+const price = document.getElementById('price');
+const desc = document.getElementById('desc');
+const menu = document.getElementById('menu');
+
+items.forEach(item => {
+    item.onclick = () => {
+        img.src = item.dataset.img;
+        name.textContent = item.dataset.name;
+        price.textContent = item.dataset.price;
+        desc.textContent = item.dataset.desc;
+
+        menu.style.display = "none";
+        preview.classList.add('show');
+    }
+});
+
+function volver() {
+    preview.classList.remove('show');
+    menu.style.display = "grid";
+}
+
+document.querySelectorAll('.category').forEach(cat => {
+    cat.onclick = () => {
+        document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+        cat.classList.add('active');
+
+        const tipo = cat.dataset.cat;
+        items.forEach(item => {
+            item.style.display = (tipo === 'todos' || item.dataset.cat === tipo) ? 'block' : 'none';
+        });
+    }
+});
+</script>
+
+</body>
+</html>
